@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
   //username legyen az id (plusz validálás, hogy egyedi legyen)
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Optional<User> user = userRepository.findByUsername(username);
+    Optional<User> user = userRepository.findUserByUsername(username);
 
     user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
 
