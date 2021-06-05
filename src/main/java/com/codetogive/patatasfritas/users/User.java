@@ -14,10 +14,6 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Id")
-    private long id;
-
     @Column(name = "Name")
     private String username;
 
