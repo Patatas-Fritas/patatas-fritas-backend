@@ -23,11 +23,11 @@ public class User {
     @Column(name = "Email")
     private String emailAddress;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "Role")
-    private UserRole role;
+//    @Enumerated(EnumType.STRING)
+    @Column(name = "Roles")
+    private String role;
 
-    public User(String username, String password, String emailAddress, UserRole role) {
+    public User(String username, String password, String emailAddress, String role) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;

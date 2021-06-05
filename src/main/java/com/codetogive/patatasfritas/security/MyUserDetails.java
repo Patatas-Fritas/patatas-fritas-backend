@@ -1,28 +1,34 @@
 package com.codetogive.patatasfritas.security;
 
 import com.codetogive.patatasfritas.users.User;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 public class MyUserDetails implements UserDetails {
 
   private final String username;
   private final String password;
+  private List<GrantedAuthority> authorities;
+
 
   public MyUserDetails(User user) {
     this.username = user.getUsername();
     this.password = user.getPassword();
+    this.authorities= Arrays.stream(user.getRole().toString().split(","))
+        .map(SimpleGrantedAuthority::new)
+        .collect(Collectors.toList());
   }
 
-  public MyUserDetails(String username, String password) {
-    this.username = username;
-    this.password = password;
-  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    return authorities;
   }
 
   @Override
