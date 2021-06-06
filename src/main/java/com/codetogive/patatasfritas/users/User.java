@@ -13,24 +13,33 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    @Id
-    @Column(name = "Name")
-    private String username;
+  @Id
+  @Column(name = "Username")
+  private String username;
 
-    @Column(name = "Password")
-    private String password;
+  @Column(name = "First_Name")
+  private String firstName;
 
-    @Column(name = "Email")
-    private String emailAddress;
+  @Column(name = "Last_Name")
+  private String lastName;
 
-//    @Enumerated(EnumType.STRING)
-    @Column(name = "Roles")
-    private String role;
+  @Column(name = "Password")
+  private String password;
 
-    public User(String username, String password, String emailAddress, String role) {
-        this.username = username;
-        this.password = password;
-        this.emailAddress = emailAddress;
-        this.role = role;
-    }
+  @Column(name = "Email")
+  private String emailAddress;
+
+  @Column(name = "Roles")
+  private String role;
+
+
+  public User(String username, String firstName, String lastName, String password,
+              String emailAddress, String role) {
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.password = password;
+    this.emailAddress = emailAddress;
+    this.role = role;
+  }
 }
