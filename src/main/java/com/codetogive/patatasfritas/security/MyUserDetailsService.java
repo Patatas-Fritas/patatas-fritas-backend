@@ -14,7 +14,6 @@ public class MyUserDetailsService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
 
-  //username legyen az id (plusz validálás, hogy egyedi legyen)
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<User> user = userRepository.findUserByUsername(username);
