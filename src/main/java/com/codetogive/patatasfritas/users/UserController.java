@@ -33,7 +33,7 @@ public class UserController {
   public ResponseEntity<LoginSuccessDTO> login(@RequestBody LoginRequestDTO loginRequestDTO)
       throws IllegalAccessException, NoSuchUserException, MissingRequiredParameterException {
     return ResponseEntity.status(HttpStatus.OK)
-        .body(new LoginSuccessDTO(userService.authenticateExistingUser(loginRequestDTO)));
+        .body(new LoginSuccessDTO(userService.authenticateExistingUser(loginRequestDTO), userService.findUserByUsername(loginRequestDTO.getUsername())));
   }
 
   @GetMapping("/k")

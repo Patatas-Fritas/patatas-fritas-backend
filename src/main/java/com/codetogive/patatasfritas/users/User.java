@@ -1,5 +1,6 @@
 package com.codetogive.patatasfritas.users;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class User {
   @Column(name = "Last_Name")
   private String lastName;
 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @Column(name = "Password")
   private String password;
 

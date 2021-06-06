@@ -5,17 +5,16 @@ import com.codetogive.patatasfritas.exceptions.MissingRequiredParameterException
 import com.codetogive.patatasfritas.security.JwtUtil;
 import com.codetogive.patatasfritas.security.MyUserDetailsService;
 import com.codetogive.patatasfritas.users.dtos.LoginRequestDTO;
-import com.codetogive.patatasfritas.users.exceptions.NoSuchUserException;
-import lombok.RequiredArgsConstructor;
 import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
+import com.codetogive.patatasfritas.users.exceptions.NoSuchUserException;
 import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -89,4 +88,11 @@ public class UserService {
   private boolean isUsernameOccupied(String username) {
     return userRepository.existsUserByUsername(username);
   }
+
+
+  public User findUserByUsername(String username) throws NoSuchUserException {
+    return userRepository.findUserByUsername(username)
+        .orElseThrow(() -> new NoSuchUserException(username));
+  }
+
 }
