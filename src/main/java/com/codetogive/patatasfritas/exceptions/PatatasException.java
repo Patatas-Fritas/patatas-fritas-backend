@@ -2,8 +2,9 @@ package com.codetogive.patatasfritas.exceptions;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+
 @Getter
-public abstract class PatatasException extends Exception{
+public abstract class PatatasException extends Exception {
 
   private final HttpStatus httpStatus;
 
