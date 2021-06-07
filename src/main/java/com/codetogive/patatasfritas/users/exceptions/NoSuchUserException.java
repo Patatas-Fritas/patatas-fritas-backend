@@ -6,6 +6,6 @@ import org.springframework.http.HttpStatus;
 public class NoSuchUserException extends PatatasException {
 
   public NoSuchUserException(String username) {
-    super(HttpStatus.UNAUTHORIZED, "No such user: " + username + "!");
+    super(HttpStatus.UNAUTHORIZED, "A megadott felhasználó nem létezik: " + username + "!");
   }
 }

@@ -22,7 +22,7 @@ public class PatatasExceptionHandler {
 
   @ExceptionHandler(BadCredentialsException.class)
   public ResponseEntity<ErrorResponseDTO> handleBadCredentialsException() {
-    ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO("Incorrect username or password!");
+    ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO("Helytelen felhasználónév vagy jelszó!");
     return new ResponseEntity<>(errorResponseDTO, HttpStatus.FORBIDDEN);
   }
 }

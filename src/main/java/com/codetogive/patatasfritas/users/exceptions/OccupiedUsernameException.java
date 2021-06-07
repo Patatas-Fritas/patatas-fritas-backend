@@ -6,6 +6,6 @@ import org.springframework.http.HttpStatus;
 public class OccupiedUsernameException extends PatatasException {
 
   public OccupiedUsernameException() {
-    super(HttpStatus.CONFLICT, "Username already taken, please choose an other one.");
+    super(HttpStatus.CONFLICT, "A megadott felhasználónév már foglalt. Kérlek, válassz másikat!");
   }
 }
