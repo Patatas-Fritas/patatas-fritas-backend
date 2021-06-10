@@ -60,4 +60,10 @@ public class UserController {
     user.setRole("ROLE_USER");
     return user;
   }
+
+  @PostMapping("/petchooser")
+  public ResponseEntity<HttpStatus> savePet(@RequestBody PetChooserDTO petChooserDTO){
+    System.out.println(petChooserDTO);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 }
