@@ -21,7 +21,7 @@ import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
 public class UserController {
 
   @Autowired
-  private UserService userService;
+  UserService userService;
 
   @PreAuthorize("hasRole('ADMIN')")
   @GetMapping("/")
@@ -43,12 +43,12 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<HttpStatus> register(@RequestBody UserRequestDTO userRequestDTO)
+  public HttpStatus register(@RequestBody UserRequestDTO userRequestDTO)
       throws IllegalAccessException, OccupiedUsernameException, MissingRequiredParameterException {
     userService.validateUser(userRequestDTO);
     User user = mapDtoToUser(userRequestDTO);
     userService.saveUser(user);
-    return new ResponseEntity<>(HttpStatus.OK);
+    return HttpStatus.OK;
   }
 
   private User mapDtoToUser(UserRequestDTO userRequestDTO) {
