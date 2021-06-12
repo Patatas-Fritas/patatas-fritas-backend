@@ -1,6 +1,7 @@
 package com.codetogive.patatasfritas.users;
 
 import com.codetogive.patatasfritas.exceptions.MissingRequiredParameterException;
+import com.codetogive.patatasfritas.playbuddies.dtos.PetChooserDTO;
 import com.codetogive.patatasfritas.users.dtos.LoginRequestDTO;
 import com.codetogive.patatasfritas.users.dtos.LoginSuccessDTO;
 import com.codetogive.patatasfritas.users.exceptions.NoSuchUserException;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
 import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
+
 
 @RestController
 public class UserController {
@@ -61,9 +63,4 @@ public class UserController {
     return user;
   }
 
-  @PostMapping("/petchooser")
-  public ResponseEntity<HttpStatus> savePet(@RequestBody PetChooserDTO petChooserDTO){
-    System.out.println(petChooserDTO);
-    return new ResponseEntity<>(HttpStatus.OK);
-  }
 }

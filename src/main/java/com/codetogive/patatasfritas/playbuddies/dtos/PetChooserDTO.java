@@ -1,4 +1,4 @@
-package com.codetogive.patatasfritas.users;
+package com.codetogive.patatasfritas.playbuddies.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

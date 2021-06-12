@@ -1,5 +1,7 @@
 package com.codetogive.patatasfritas.playbuddies;
 
+import java.security.Timestamp;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +20,7 @@ public class PlayBuddy {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @OneToOne
-  @JoinColumn(name = "score_id")
   private int score;
+
+  private Timestamp lastFeeding;
 }
