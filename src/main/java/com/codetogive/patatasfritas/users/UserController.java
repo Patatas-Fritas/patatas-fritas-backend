@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
 import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 
