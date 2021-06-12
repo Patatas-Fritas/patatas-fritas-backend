@@ -3,6 +3,7 @@ package com.codetogive.patatasfritas.users;
 import com.codetogive.patatasfritas.exceptions.ExceptionUtil;
 import com.codetogive.patatasfritas.exceptions.MissingRequiredParameterException;
 import com.codetogive.patatasfritas.security.JwtUtil;
+import com.codetogive.patatasfritas.security.MyUserDetails;
 import com.codetogive.patatasfritas.security.MyUserDetailsService;
 import com.codetogive.patatasfritas.users.dtos.LoginRequestDTO;
 import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
@@ -39,7 +40,7 @@ public class UserService {
     authenticationManager
         .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(),
             loginRequestDTO.getPassword()));
-    UserDetails userDetails =
+    MyUserDetails userDetails =
         myUserDetailsService.loadUserByUsername(loginRequestDTO.getUsername());
     return jwtUtil.generateToken(userDetails);
   }
