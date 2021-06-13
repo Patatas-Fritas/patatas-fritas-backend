@@ -2,13 +2,11 @@ package com.codetogive.patatasfritas.playbuddies;
 
 import com.codetogive.patatasfritas.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import com.codetogive.patatasfritas.scores.Score;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +29,9 @@ public class PlayBuddy {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-//  @Column(name = "score")
-//  private int score;
+  @OneToOne
+  @JoinColumn(name = "score_id")
+  private Score score;
 
   @Column(name = "last_feeding")
   private Timestamp lastFeeding;

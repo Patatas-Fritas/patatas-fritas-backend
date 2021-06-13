@@ -2,7 +2,7 @@ package com.codetogive.patatasfritas.users;
 
 import com.codetogive.patatasfritas.playbuddies.PlayBuddy;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.codetogive.patatasfritas.scores.Score;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,23 +18,19 @@ import javax.persistence.*;
 public class User {
 
   @Id
-  @Column(name = "Username")
   private String username;
 
-  @Column(name = "First_Name")
   private String firstName;
 
-  @Column(name = "Last_Name")
   private String lastName;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-  @Column(name = "Password")
   private String password;
 
-  @Column(name = "Email")
+  @Column(name = "email")
   private String emailAddress;
 
-  @Column(name = "Roles")
+  @Column(name = "roles")
   private String role;
 
   @OneToOne(cascade = CascadeType.ALL)
@@ -42,6 +38,10 @@ public class User {
   @JsonBackReference
   private PlayBuddy playBuddy;
 
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "score_id")
+  @JsonBackReference
+  private Score score;
 
   public User(String username, String firstName, String lastName, String password,
               String emailAddress, String role) {
@@ -52,5 +52,6 @@ public class User {
     this.emailAddress = emailAddress;
     this.role = role;
     this.playBuddy=new PlayBuddy();
+    this.score = new Score();
   }
 }
