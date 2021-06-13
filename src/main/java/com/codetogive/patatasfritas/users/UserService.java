@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -92,7 +91,7 @@ public class UserService {
 
 
   public User findUserByUsername(String username) throws NoSuchUserException {
-    return userRepository.findUserByUsername(username)
+    return userRepository.findByUsername(username)
         .orElseThrow(() -> new NoSuchUserException(username));
   }
 

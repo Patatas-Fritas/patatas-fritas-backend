@@ -1,6 +1,7 @@
 package com.codetogive.patatasfritas.users;
 
 import com.codetogive.patatasfritas.exceptions.MissingRequiredParameterException;
+import com.codetogive.patatasfritas.playbuddies.PlayBuddy;
 import com.codetogive.patatasfritas.playbuddies.dtos.PetChooserDTO;
 import com.codetogive.patatasfritas.users.dtos.LoginRequestDTO;
 import com.codetogive.patatasfritas.users.dtos.LoginSuccessDTO;
@@ -60,6 +61,7 @@ public class UserController {
     user.setEmailAddress(userRequestDTO.getEmail());
     user.setPassword(userRequestDTO.getPassword());
     user.setRole("ROLE_USER");
+    user.setPlayBuddy(new PlayBuddy());
     return user;
   }
 

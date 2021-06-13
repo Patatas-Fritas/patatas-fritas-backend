@@ -3,6 +3,8 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS words;
 DROP TABLE IF EXISTS word;
+DROP TABLE IF EXISTS buddy;
+
 SET foreign_key_checks = 1;
 
 create TABLE words(
@@ -20,30 +22,37 @@ create TABLE word(
 
 
 DROP TABLE IF EXISTS play_buddy;
-DROP TABLE IF EXISTS scores;
 SET foreign_key_checks = 1;
 
-create TABLE scores
+CREATE TABLE buddy
 (
     id BIGINT AUTO_INCREMENT,
-    sum INTEGER,
-    last_used TIMESTAMP,
+    type varchar(20),
     PRIMARY KEY (id)
 );
 
-insert into scores (`id`, `sum`, `last_used`) values('1', '15','2020-10-20 10:12:48');
-insert into scores (`id`, `sum`, `last_used`) values('2', '10', '2020-10-20 10:12:48');
+INSERT INTO buddy (`id`, `type`) values
+('1', 'dino'),
+('2', 'cat'),
+('3', 'dog'),
+('4', 'fox'),
+('5', 'mink');
+
 
 create TABLE play_buddy
 (
-    id BIGINT AUTO_INCREMENT,
-    score_id BIGINT,
+    id BIGINT AUTO_INCREMENT NOT NULL ,
+    last_feeding TIMESTAMP,
+    name varchar(50),
+    buddy_id BIGINT,
     PRIMARY KEY (id),
-    FOREIGN KEY (score_id) REFERENCES scores (id)
+    FOREIGN KEY (buddy_id) REFERENCES buddy (id)
 );
 
-insert into play_buddy(`id`,`score_id`) value ('1', '1');
-insert into play_buddy(`id`,`score_id`) value ('2', '2');
+insert into play_buddy(`id`,`last_feeding`, `name`,`buddy_id`)
+values
+('1', '2021-06-20 10:12:48', 'Gazsika', '2'),
+('2', '2021-06-20 10:12:48', 'Bazsika', '3');
 
 create TABLE users
 (
@@ -53,10 +62,10 @@ create TABLE users
     password VARCHAR(100),
     email VARCHAR(100),
     roles VARCHAR(100),
-    score_id BIGINT,
+    play_buddy_id BIGINT,
     PRIMARY KEY (username),
-    FOREIGN KEY (score_id) REFERENCES scores (id)
+    FOREIGN KEY (play_buddy_id) REFERENCES play_buddy (id)
 );
 
-insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`,`score_id`) values('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN','1');
-insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`,`score_id`) values('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER','2');
+insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`) values('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN', '1');
+insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`) values('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER', '1');
