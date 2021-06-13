@@ -8,5 +8,7 @@ import lombok.Setter;
 @Setter
 public class WordsDTO {
 
+  private String title;
+
   private List<Word> words;
 }

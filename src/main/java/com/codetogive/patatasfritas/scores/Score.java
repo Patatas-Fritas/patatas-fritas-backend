@@ -2,12 +2,9 @@ package com.codetogive.patatasfritas.scores;
 
 import com.codetogive.patatasfritas.playbuddies.PlayBuddy;
 import com.codetogive.patatasfritas.users.User;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
