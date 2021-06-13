@@ -3,19 +3,9 @@ SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS words;
 DROP TABLE IF EXISTS word;
+DROP TABLE IF EXISTS buddy;
+
 SET foreign_key_checks = 1;
-
-create TABLE users(
-    Username VARCHAR(100) PRIMARY KEY,
-    First_Name VARCHAR(100),
-    Last_Name VARCHAR(100),
-    Password VARCHAR(100),
-    Email VARCHAR(100),
-    Roles VARCHAR(100)
-);
-
-insert into users(`Username`, `First_Name` , `Last_Name`, `Password`, `Email`, `Roles`) values('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN');
-insert into users(`Username`, `First_Name` , `Last_Name`, `Password`, `Email`, `Roles`) values('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER');
 
 create TABLE words(
     id BIGINT AUTO_INCREMENT,
@@ -31,4 +21,51 @@ create TABLE word(
 );
 
 
+DROP TABLE IF EXISTS play_buddy;
+SET foreign_key_checks = 1;
 
+CREATE TABLE buddy
+(
+    id BIGINT AUTO_INCREMENT,
+    type varchar(20),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO buddy (`id`, `type`) values
+('1', 'dino'),
+('2', 'cat'),
+('3', 'dog'),
+('4', 'fox'),
+('5', 'mink');
+
+
+create TABLE play_buddy
+(
+    id BIGINT AUTO_INCREMENT NOT NULL ,
+    last_feeding TIMESTAMP,
+    name varchar(50),
+    buddy_id BIGINT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (buddy_id) REFERENCES buddy (id)
+);
+
+insert into play_buddy(`id`,`last_feeding`, `name`,`buddy_id`)
+values
+('1', '2021-06-20 10:12:48', 'Gazsika', '2'),
+('2', '2021-06-20 10:12:48', 'Bazsika', '3');
+
+create TABLE users
+(
+    username VARCHAR(100),
+    first_Name VARCHAR(100),
+    last_Name VARCHAR(100),
+    password VARCHAR(100),
+    email VARCHAR(100),
+    roles VARCHAR(100),
+    play_buddy_id BIGINT,
+    PRIMARY KEY (username),
+    FOREIGN KEY (play_buddy_id) REFERENCES play_buddy (id)
+);
+
+insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`) values('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN', '1');
+insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`) values('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER', '1');
