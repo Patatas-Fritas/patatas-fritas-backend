@@ -1,12 +1,12 @@
 package com.codetogive.patatasfritas.playbuddies;
 
+import com.codetogive.patatasfritas.scores.Score;
 import com.codetogive.patatasfritas.users.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import com.codetogive.patatasfritas.scores.Score;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

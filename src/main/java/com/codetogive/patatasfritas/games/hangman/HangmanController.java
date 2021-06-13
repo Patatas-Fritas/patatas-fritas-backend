@@ -1,11 +1,12 @@
 package com.codetogive.patatasfritas.games.hangman;
 
+import com.codetogive.patatasfritas.games.Game;
+import com.codetogive.patatasfritas.games.GameService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,10 +19,16 @@ public class HangmanController {
   @Autowired
   HangmanService hangmanService;
 
+  @Autowired
+  GameService gameService;
+
   @PostMapping("/hangman/save_word")
-  public HttpStatus saveWord(@RequestBody WordsDTO wordsDTO) {
+  public HttpStatus saveNewGame(@RequestBody WordsDTO wordsDTO) {
     Words words = mapDtoToWords(wordsDTO);
+    Game game = mapDtoToGame(wordsDTO);
+    game.setGameType(gameService.getGameType(1L));
     hangmanService.saveWords(words);
+    gameService.saveGame(game);
     return HttpStatus.OK;
   }
 
@@ -44,5 +51,11 @@ public class HangmanController {
     TextsDTO dto = new TextsDTO();
     dto.setTexts(words);
     return dto;
+  }
+
+  private Game mapDtoToGame(WordsDTO wordsDTO) {
+    Game game = new Game();
+    game.setTitle(wordsDTO.getTitle());
+    return game;
   }
 }

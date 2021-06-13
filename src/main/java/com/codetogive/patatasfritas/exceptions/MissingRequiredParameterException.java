@@ -1,7 +1,6 @@
 package com.codetogive.patatasfritas.exceptions;
 
 import java.util.List;
-
 import org.springframework.http.HttpStatus;
 
 public class MissingRequiredParameterException extends PatatasException {
