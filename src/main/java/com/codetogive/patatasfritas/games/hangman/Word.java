@@ -27,9 +27,9 @@ public class Word {
   private String text;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "words_id")
+  @JoinColumn(name = "hangmans_id")
   @JsonBackReference
-  private Words words;
+  private Hangman hangman;
 
   public Word(String text) {
     this.text = text;

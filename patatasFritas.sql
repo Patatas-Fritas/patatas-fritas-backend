@@ -1,14 +1,18 @@
 USE patatasFritas;
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS words;
+DROP TABLE IF EXISTS hangmans;
 DROP TABLE IF EXISTS word;
 DROP TABLE IF EXISTS buddy;
 DROP TABLE IF EXISTS play_buddy;
 DROP TABLE IF EXISTS scores;
+DROP TABLE IF EXISTS game_type;
+DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS hotspots;
+DROP TABLE IF EXISTS rectangles;
 SET foreign_key_checks = 1;
 
-create TABLE words(
+create TABLE hangmans(
     id BIGINT AUTO_INCREMENT,
     PRIMARY KEY (id)
 );
@@ -16,9 +20,28 @@ create TABLE words(
 create TABLE word(
     id BIGINT AUTO_INCREMENT,
     text VARCHAR(100),
-    words_id BIGINT,
+    hangmans_id BIGINT,
     PRIMARY KEY (id),
-    FOREIGN KEY (words_id) REFERENCES words (id)
+    FOREIGN KEY (hangmans_id) REFERENCES hangmans (id)
+);
+
+create TABLE rectangles
+(
+    id BIGINT AUTO_INCREMENT,
+    x INTEGER,
+    y INTEGER,
+    width INTEGER,
+    height INTEGER,
+    PRIMARY KEY (id)
+);
+
+create TABLE hotspots
+(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    image VARCHAR (100),
+    rectangles_id BIGINT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (rectangles_id) REFERENCES rectangles (id)
 );
 
 create TABLE buddy
@@ -29,24 +52,6 @@ create TABLE buddy
 );
 
 insert into buddy (`id`, `type`) values
-('1', 'dino'),
-('2', 'cat'),
-('3', 'dog'),
-('4', 'fox'),
-('5', 'mink');
-
-<<<<<<< HEAD
-DROP TABLE IF EXISTS play_buddy;
-SET foreign_key_checks = 1;
-
-CREATE TABLE buddy
-(
-    id BIGINT AUTO_INCREMENT,
-    type varchar(20),
-    PRIMARY KEY (id)
-);
-
-INSERT INTO buddy (`id`, `type`) values
 ('1', 'dino'),
 ('2', 'cat'),
 ('3', 'dog'),
@@ -66,18 +71,10 @@ insert into scores (`id`, `sum`, `last_used`) values('2', '10', '2020-10-20 10:1
 
 create TABLE play_buddy
 (
-    id BIGINT AUTO_INCREMENT NOT NULL ,
+    id BIGINT AUTO_INCREMENT NOT NULL,
     last_feeding TIMESTAMP,
     name varchar(50),
     buddy_id BIGINT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (buddy_id) REFERENCES buddy (id)
-);
-
-insert into play_buddy(`id`,`last_feeding`, `name`,`buddy_id`)
-values
-('1', '2021-06-20 10:12:48', 'Gazsika', '2'),
-('2', '2021-06-20 10:12:48', 'Bazsika', '3');
     score_id BIGINT,
     PRIMARY KEY (id),
     FOREIGN KEY (buddy_id) REFERENCES buddy (id),
@@ -102,8 +99,35 @@ create TABLE users
     PRIMARY KEY (username),
     FOREIGN KEY (play_buddy_id) REFERENCES play_buddy (id),
     FOREIGN KEY (score_id) REFERENCES scores (id)
-
 );
 
-insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`,`score_id`) values('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN', '1', '1');
-insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`,`score_id`) values('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER', '2', '2');
+insert into users  (`username`, `first_Name` , `last_Name`, `password`, `email`, `roles`, `play_buddy_id`, `score_id`)
+values
+('Géza', 'Géza', 'Amigos', 'pass', 'géza@etwas.de', 'ROLE_ADMIN', '1', '1'),
+('Lili', 'Lili', 'Kid', 'pass', 'lili@etwas.de', 'ROLE_USER', '2', '2');
+
+create table game_type
+(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    type VARCHAR (100),
+    description VARCHAR (100),
+    PRIMARY KEY (id)
+);
+
+insert into game_type (`id`, `type`, `description`)
+values
+('1','Hangman', 'Hangman description'),
+('2','Hotspot', 'Hotspot description');
+
+create table games
+(
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    title VARCHAR (100),
+    game_type_id BIGINT,
+    hotspots_id BIGINT,
+    hangmans_id BIGINT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (game_type_id) REFERENCES game_type (id),
+    FOREIGN KEY (hotspots_id) REFERENCES hotspots (id),
+    FOREIGN KEY (hangmans_id) REFERENCES hangmans (id)
+);

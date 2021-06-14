@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class HangmanService {
   @Autowired
-  WordsRepository wordsRepository;
+  HangmanRepository hangmanRepository;
 
-  public void saveWords(Words words) {
-    wordsRepository.save(words);
+  public void saveWords(Hangman hangman) {
+    hangmanRepository.save(hangman);
   }
 
-  public Words getWords(Long id) {
-    return wordsRepository.findById(id).orElseThrow(NoSuchElementException::new);
+  public Hangman getWords(Long id) {
+    return hangmanRepository.findById(id).orElseThrow(NoSuchElementException::new);
   }
 }

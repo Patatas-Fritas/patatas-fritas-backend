@@ -5,7 +5,9 @@ import com.codetogive.patatasfritas.playbuddies.PlayBuddy;
 import com.codetogive.patatasfritas.scores.Score;
 import com.codetogive.patatasfritas.users.dtos.LoginRequestDTO;
 import com.codetogive.patatasfritas.users.dtos.LoginSuccessDTO;
+import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
 import com.codetogive.patatasfritas.users.exceptions.NoSuchUserException;
+import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.codetogive.patatasfritas.users.dtos.UserRequestDTO;
-import com.codetogive.patatasfritas.users.exceptions.OccupiedUsernameException;
 
 
 @RestController

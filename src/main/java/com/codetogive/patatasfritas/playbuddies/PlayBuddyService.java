@@ -7,7 +7,6 @@ import com.codetogive.patatasfritas.users.exceptions.NoSuchUserException;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +24,8 @@ public class PlayBuddyService {
 
   public PlayBuddy savePlayBuddy(PetChooserDTO petChooserDTO, Principal principal)
       throws NoSuchUserException, NoSuchBuddyException {
-    Buddy buddy = buddyRepository.findById(petChooserDTO.getPetId()).orElseThrow(() -> new NoSuchBuddyException(petChooserDTO.getPetId()));
+    Buddy buddy = buddyRepository.findById(petChooserDTO.getPetId())
+        .orElseThrow(() -> new NoSuchBuddyException(petChooserDTO.getPetId()));
     User user = userService.findUserByUsername(principal.getName());
     user.getPlayBuddy().setName(petChooserDTO.getPetName());
     user.getPlayBuddy().setLastFeeding(Timestamp.valueOf(LocalDateTime.now()));
