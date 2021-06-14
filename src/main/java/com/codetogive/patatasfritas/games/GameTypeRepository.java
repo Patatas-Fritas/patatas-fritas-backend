@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameTypeRepository extends CrudRepository<GameType, Long> {
-   Optional<GameType> findById(Long id);
+  Optional<GameType> findById(Long id);
 }

@@ -23,12 +23,9 @@ public class HangmanController {
   GameService gameService;
 
   @PostMapping("/hangman/save_word")
-  public HttpStatus saveNewGame(@RequestBody WordsDTO wordsDTO) {
-    Words words = mapDtoToWords(wordsDTO);
-    Game game = mapDtoToGame(wordsDTO);
-    game.setGameType(gameService.getGameType(1L));
-    hangmanService.saveWords(words);
-    gameService.saveGame(game);
+  public HttpStatus saveNewGame(@RequestBody HangmanDTO hangmanDTO) {
+    Hangman hangman = mapDtoToWords(hangmanDTO);
+    hangmanService.saveWords(hangman);
     return HttpStatus.OK;
   }
 
@@ -41,21 +38,19 @@ public class HangmanController {
         .body(textsDTO);
   }
 
-  private Words mapDtoToWords(WordsDTO wordsDTO) {
-    Words words = new Words();
-    words.setWordList(wordsDTO.getWords());
-    return words;
+  private Hangman mapDtoToWords(HangmanDTO hangmanDTO) {
+    Hangman hangman = new Hangman();
+    hangman.setWordList(hangmanDTO.getWords());
+    Game game = new Game();
+    game.setTitle(hangmanDTO.getTitle());
+    game.setGameType(gameService.getGameType(1L));
+    hangman.setGame(game);
+    return hangman;
   }
 
   private TextsDTO mapWordsToDTO(List<String> words) {
     TextsDTO dto = new TextsDTO();
     dto.setTexts(words);
     return dto;
-  }
-
-  private Game mapDtoToGame(WordsDTO wordsDTO) {
-    Game game = new Game();
-    game.setTitle(wordsDTO.getTitle());
-    return game;
   }
 }

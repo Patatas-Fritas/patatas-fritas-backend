@@ -39,7 +39,7 @@ public class PlayBuddy {
   private String name;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name="buddy_id")
+  @JoinColumn(name = "buddy_id")
   @JsonBackReference
   private Buddy buddy;
 

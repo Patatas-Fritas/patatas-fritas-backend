@@ -24,7 +24,8 @@ public class PlayBuddyService {
 
   public PlayBuddy savePlayBuddy(PetChooserDTO petChooserDTO, Principal principal)
       throws NoSuchUserException, NoSuchBuddyException {
-    Buddy buddy = buddyRepository.findById(petChooserDTO.getPetId()).orElseThrow(() -> new NoSuchBuddyException(petChooserDTO.getPetId()));
+    Buddy buddy = buddyRepository.findById(petChooserDTO.getPetId())
+        .orElseThrow(() -> new NoSuchBuddyException(petChooserDTO.getPetId()));
     User user = userService.findUserByUsername(principal.getName());
     user.getPlayBuddy().setName(petChooserDTO.getPetName());
     user.getPlayBuddy().setLastFeeding(Timestamp.valueOf(LocalDateTime.now()));

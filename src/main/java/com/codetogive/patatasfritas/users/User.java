@@ -56,7 +56,7 @@ public class User {
     this.password = password;
     this.emailAddress = emailAddress;
     this.role = role;
-    this.playBuddy=new PlayBuddy();
+    this.playBuddy = new PlayBuddy();
     this.score = new Score();
   }
 }

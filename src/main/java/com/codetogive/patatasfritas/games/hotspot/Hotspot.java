@@ -1,7 +1,9 @@
 package com.codetogive.patatasfritas.games.hotspot;
 
+import com.codetogive.patatasfritas.games.Game;
 import com.codetogive.patatasfritas.games.hotspot.rectangle.Rectangle;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,4 +32,7 @@ public class Hotspot {
   @JsonBackReference
   private Rectangle rectangle;
 
+  @JsonIgnore
+  @OneToOne(mappedBy = "hotspot")
+  private Game game;
 }

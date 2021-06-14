@@ -18,9 +18,10 @@ public class PlayBuddyController {
   PlayBuddyService playBuddyService;
 
   @PostMapping("/petchooser")
-  public ResponseEntity<PetChooserSuccessDTO> savePet(@RequestBody PetChooserDTO petChooserDTO, Principal principal)
+  public ResponseEntity<PetChooserSuccessDTO> savePet(@RequestBody PetChooserDTO petChooserDTO,
+                                                      Principal principal)
       throws NoSuchUserException, NoSuchBuddyException {
-    PlayBuddy playBuddy=playBuddyService.savePlayBuddy(petChooserDTO, principal);
+    PlayBuddy playBuddy = playBuddyService.savePlayBuddy(petChooserDTO, principal);
     return ResponseEntity.status(HttpStatus.OK)
         .body(new PetChooserSuccessDTO(playBuddy));
   }

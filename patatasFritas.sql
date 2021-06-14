@@ -1,7 +1,7 @@
 USE patatasFritas;
 SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS words;
+DROP TABLE IF EXISTS hangmans;
 DROP TABLE IF EXISTS word;
 DROP TABLE IF EXISTS buddy;
 DROP TABLE IF EXISTS play_buddy;
@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS hotspots;
 DROP TABLE IF EXISTS rectangles;
 SET foreign_key_checks = 1;
 
-create TABLE words(
+create TABLE hangmans(
     id BIGINT AUTO_INCREMENT,
     PRIMARY KEY (id)
 );
@@ -20,9 +20,9 @@ create TABLE words(
 create TABLE word(
     id BIGINT AUTO_INCREMENT,
     text VARCHAR(100),
-    words_id BIGINT,
+    hangmans_id BIGINT,
     PRIMARY KEY (id),
-    FOREIGN KEY (words_id) REFERENCES words (id)
+    FOREIGN KEY (hangmans_id) REFERENCES hangmans (id)
 );
 
 create TABLE rectangles
@@ -124,6 +124,10 @@ create table games
     id BIGINT AUTO_INCREMENT NOT NULL,
     title VARCHAR (100),
     game_type_id BIGINT,
+    hotspots_id BIGINT,
+    hangmans_id BIGINT,
     PRIMARY KEY (id),
-    FOREIGN KEY (game_type_id) REFERENCES game_type (id)
+    FOREIGN KEY (game_type_id) REFERENCES game_type (id),
+    FOREIGN KEY (hotspots_id) REFERENCES hotspots (id),
+    FOREIGN KEY (hangmans_id) REFERENCES hangmans (id)
 );

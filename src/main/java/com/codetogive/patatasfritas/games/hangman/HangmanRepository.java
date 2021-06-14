@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public interface WordsRepository extends CrudRepository<Words, Long> {
+public interface HangmanRepository extends CrudRepository<Hangman, Long> {
 
-  Optional<Words> findById(Long id);
+  Optional<Hangman> findById(Long id);
 }

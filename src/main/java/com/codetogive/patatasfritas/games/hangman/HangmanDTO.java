@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WordsDTO {
+public class HangmanDTO {
 
   private String title;
 
