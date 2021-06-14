@@ -32,4 +32,11 @@ public class PlayBuddyService {
     user.getPlayBuddy().setBuddy(buddy);
     return userService.saveUser(user).getPlayBuddy();
   }
+
+  public PlayBuddy getPetStatus(Principal principal) throws NoSuchUserException {
+    User user = userService.findUserByUsername(principal.getName());
+    PlayBuddy playBuddy = user.getPlayBuddy();
+    return playBuddy;
+  }
+
 }
