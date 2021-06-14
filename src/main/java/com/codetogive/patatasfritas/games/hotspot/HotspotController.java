@@ -30,7 +30,7 @@ public class HotspotController {
     return HttpStatus.OK;
   }
 
-  @GetMapping("hotspot/get")
+  @GetMapping("/hotspot/get")
   public ResponseEntity<HotspotResponseDTO> getHotSpot(@RequestParam Long id) {
     Hotspot hotspot = hotspotService.getHotspot(id);
     HotspotResponseDTO hotspotResponseDTO = mapHotspotToDTO(hotspot);
