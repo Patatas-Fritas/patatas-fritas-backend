@@ -38,7 +38,7 @@ create TABLE rectangles
 create TABLE hotspots
 (
     id BIGINT AUTO_INCREMENT NOT NULL,
-    image VARCHAR (100),
+    image TEXT,
     rectangles_id BIGINT,
     PRIMARY KEY (id),
     FOREIGN KEY (rectangles_id) REFERENCES rectangles (id)
