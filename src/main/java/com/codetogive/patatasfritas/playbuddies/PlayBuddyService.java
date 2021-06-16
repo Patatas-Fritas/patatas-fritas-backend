@@ -32,4 +32,22 @@ public class PlayBuddyService {
     user.getPlayBuddy().setBuddy(buddy);
     return userService.saveUser(user).getPlayBuddy();
   }
+
+  public PlayBuddy getPetStatus(Principal principal) throws NoSuchUserException {
+    User user = userService.findUserByUsername(principal.getName());
+    PlayBuddy playBuddy = user.getPlayBuddy();
+    return playBuddy;
+  }
+
+  public PlayBuddy feedPet(Principal principal) throws NoSuchUserException {
+    User user = userService.findUserByUsername(principal.getName());
+    PlayBuddy playBuddy = user.getPlayBuddy();
+    int difference = 12 * 60 * 60 * 1000;
+    if ((Timestamp.valueOf(LocalDateTime.now()).getTime() - playBuddy.getLastFeeding().getTime()
+        > difference) && user.getScore().getSum() >= 5) {
+      user.getScore().setSum(user.getScore().getSum() - 5);
+      user.getPlayBuddy().setLastFeeding(Timestamp.valueOf(LocalDateTime.now()));
+    }
+    return userService.saveUser(user).getPlayBuddy();
+  }
 }
