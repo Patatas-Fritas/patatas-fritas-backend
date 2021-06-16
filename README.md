@@ -1,6 +1,8 @@
 # patatas-fritas-backend
 
-<b>Demo link: https://youtu.be/z6IGkDguC8s <b>
+## Youtube Video
+
+[Patatas Fritas Introduction Video](https://youtu.be/z6IGkDguC8s)
 
 Before running the application, please <b>define the necessary environment variables!<b>
   
