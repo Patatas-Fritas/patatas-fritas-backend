@@ -23,10 +23,7 @@ public class HotspotController {
   @PostMapping("/hotspot/save")
   public HttpStatus saveNewGame(@RequestBody HotspotDTO hotspotDTO) {
     Hotspot hotspot = mapDtoToHotspot(hotspotDTO);
-    Game game = mapDtoToGame(hotspotDTO);
-    game.setGameType(gameService.getGameType(2L));
     hotspotService.saveHotspot(hotspot);
-    gameService.saveGame(game);
     return HttpStatus.OK;
   }
 
@@ -42,13 +39,11 @@ public class HotspotController {
     Hotspot hotspot = new Hotspot();
     hotspot.setImage(hotspotDTO.getImage());
     hotspot.setRectangle(hotspotDTO.getRectangle());
-    return hotspot;
-  }
-
-  private Game mapDtoToGame(HotspotDTO hotspotDTO) {
     Game game = new Game();
     game.setTitle(hotspotDTO.getTitle());
-    return game;
+    game.setGameType(gameService.getGameType(2L));
+    hotspot.setGame(game);
+    return hotspot;
   }
 
   private HotspotResponseDTO mapHotspotToDTO(Hotspot hotspot) {

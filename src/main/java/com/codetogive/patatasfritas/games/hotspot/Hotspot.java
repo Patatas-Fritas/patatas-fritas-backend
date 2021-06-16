@@ -35,6 +35,6 @@ public class Hotspot {
   private Rectangle rectangle;
 
   @JsonIgnore
-  @OneToOne(mappedBy = "hotspot")
+  @OneToOne(mappedBy = "hotspot", cascade = CascadeType.ALL)
   private Game game;
 }
